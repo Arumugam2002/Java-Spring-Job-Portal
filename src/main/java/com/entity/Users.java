@@ -1,26 +1,19 @@
 package com.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+
 
 @Entity
 @Table(name="users")
 public class Users {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	
 	@Column(unique = true)
@@ -36,7 +29,7 @@ public class Users {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "userTypeId" , referencedColumnName = "userTypeId")
-	private UsersType usersTypeId;
+	private UsersType userTypeId;
 
 	
 	public Users() {
@@ -44,22 +37,22 @@ public class Users {
 	}
 
 	public Users(int userId, String email, String password, boolean isActive, Date registrationDate,
-			UsersType usersTypeId) {
-		super();
+			UsersType userTypeId) {
+		//super();
 		this.userId = userId;
 		this.email = email;
 		this.password = password;
 		this.isActive = isActive;
 		this.registrationDate = registrationDate;
-		this.usersTypeId = usersTypeId;
+		this.userTypeId = userTypeId;
 	}
 
-	public int getUsersId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUsersId(int usersId) {
-		this.userId = usersId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -82,8 +75,8 @@ public class Users {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 
 	public Date getRegistrationDate() {
@@ -94,18 +87,18 @@ public class Users {
 		this.registrationDate = registrationDate;
 	}
 
-	public UsersType getUsersTypeId() {
-		return usersTypeId;
+	public UsersType getUserTypeId() {
+		return userTypeId;
 	}
 
-	public void setUsersTypeId(UsersType usersTypeId) {
-		this.usersTypeId = usersTypeId;
+	public void setUserTypeId(UsersType userTypeId) {
+		this.userTypeId = userTypeId;
 	}
 
 	@Override
 	public String toString() {
 		return "Users [usersId=" + userId + ", email=" + email + ", password=" + password + ", isActive=" + isActive
-				+ ", registrationDate=" + registrationDate + ", usersTypeId=" + usersTypeId + "]";
+				+ ", registrationDate=" + registrationDate + ", usersTypeId=" + userTypeId + "]";
 	}
 	
 	
