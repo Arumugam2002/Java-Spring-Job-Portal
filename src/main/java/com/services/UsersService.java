@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.entity.JobSeekerProfile;
@@ -21,18 +22,23 @@ public class UsersService {
 	public final UserRepository userRepository;
 	public final JobSeekerProfileRepository jobSeekerProfileRepository;
 	public final RecruiterProfileRepository recruiterProfileRepository;
+	public final PasswordEncoder passwordEncoder;
 
-	public UsersService(UserRepository userRepository, JobSeekerProfileRepository jobSeekerProfileRepository, RecruiterProfileRepository recruiterProfileRepository) {
+	public UsersService(UserRepository userRepository, JobSeekerProfileRepository jobSeekerProfileRepository, RecruiterProfileRepository recruiterProfileRepository, PasswordEncoder passwordEncoder) {
 		
 		this.userRepository = userRepository;
 		this.jobSeekerProfileRepository = jobSeekerProfileRepository;
 		this.recruiterProfileRepository = recruiterProfileRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	public Users addNewUsers(Users users)
 	{
 		users.setActive(true);
 		users.setRegistrationDate(new Date(System.currentTimeMillis()));
+		
+		users.setPassword(passwordEncoder.encode(users.getPassword()));
+		
 		Users savedUsers = userRepository.save(users);
 		int userTypeId = users.getUserTypeId().getUserTypeId();
 		if(userTypeId == 1)

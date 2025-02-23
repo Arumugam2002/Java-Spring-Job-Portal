@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.entity.Users;
 import com.repository.UserRepository;
+import com.util.CustomUserDetails;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
