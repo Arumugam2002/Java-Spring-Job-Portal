@@ -74,12 +74,12 @@ public class UsersService {
 			if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter")))
 			{
 				RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
-				
+				return recruiterProfile;
 			}
 			else 
 			{
 				JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
-				
+				return jobSeekerProfile;
 			}
 
 		}
