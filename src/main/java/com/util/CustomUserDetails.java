@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Simple;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ import com.entity.UsersType;
 public class CustomUserDetails implements UserDetails{
 
 	
-	public final Users users;
+	public Users users;
 	
 	
 	public CustomUserDetails(Users users) {
@@ -57,7 +57,7 @@ public class CustomUserDetails implements UserDetails{
 	@Override
 	public boolean isAccountNonLocked()
 	{
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -69,7 +69,7 @@ public class CustomUserDetails implements UserDetails{
 	@Override
 	public boolean isEnabled()
 	{
-		return false;
+		return true;
 	}
 
 }
