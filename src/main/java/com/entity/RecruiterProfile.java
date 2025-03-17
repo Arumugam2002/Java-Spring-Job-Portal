@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "recruiter_profile")
@@ -132,6 +133,15 @@ public class RecruiterProfile {
 
 	public void setProfilePhoto(String profilePhoto) {
 		this.profilePhoto = profilePhoto;
+	}
+	
+	@Transient
+	public String getPhotosImagePath()
+	{
+		if(profilePhoto == null) 
+			return null;
+		
+		return "/photos/recruiter/" + userAccount + "/" + profilePhoto;
 	}
 
 	@Override
